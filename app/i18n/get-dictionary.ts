@@ -1,11 +1,12 @@
 export async function getDictionary(lang: string) {
-  // 动态引入对应语言的 JSON 文件
   try {
-    const dictionary = await import(`./locales/${lang}.json`);
-    return dictionary;
+    // 动态加载语言 JSON 文件
+    const dictionaryModule = await import(`./locales/${lang}.json`);
+    // 只返回 dictionaryModule.default（纯对象），而非完整模块
+    return dictionaryModule.default;
   } catch (e) {
-    // 若出错可回退到英文或其他逻辑，根据需求处理
-    const fallback = await import('./locales/en.json');
-    return fallback;
+    // 出错则回退到英文
+    const fallbackModule = await import('./locales/en.json');
+    return fallbackModule.default;
   }
 } 
