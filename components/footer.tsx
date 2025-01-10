@@ -9,6 +9,7 @@ export function Footer() {
   const t = useTranslation();
   const { lang } = useParams();
 
+  // 依旧使用 footerSections，里头的 href 加上语言前缀或自定义逻辑
   const footerSections = [
     {
       title: t.footer.company.title,
@@ -29,9 +30,10 @@ export function Footer() {
     {
       title: t.footer.resources.title,
       links: [
-        { label: t.footer.resources.docs, href: '/docs' },
-        { label: t.footer.resources.blog, href: '/blog' },
+        { label: t.footer.resources.docs, href: 'https://blog.allbs.cn' },
+        { label: t.footer.resources.blog, href: 'https://blog.allbs.cn' },
         { label: t.footer.resources.help, href: '/help' },
+        { label: t.footer.resources.manage, href: 'https://m.allbs.cn' },
       ],
     },
     {
@@ -44,15 +46,17 @@ export function Footer() {
     },
   ];
 
+  // 保留社交链接
   const socialLinks = [
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/chenqi92', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
   ];
 
   return (
-    <footer id="contact" className="bg-muted/50 border-t">
+    <footer id="footer" className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
+        {/* 多列区块 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {footerSections.map((section) => (
             <div key={section.title}>
@@ -73,6 +77,7 @@ export function Footer() {
           ))}
         </div>
 
+        {/* 下方版权 & 社交链接 */}
         <div className="mt-12 pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">

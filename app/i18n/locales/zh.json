@@ -90,7 +90,8 @@
       "title": "资源",
       "docs": "开发文档",
       "blog": "博客",
-      "help": "帮助中心"
+      "help": "帮助中心",
+      "manage": "管理系统"
     },
     "legal": {
       "title": "法律",
@@ -105,5 +106,20 @@
       "linkedin": "领英"
     },
     "copyright": "© 2024 AI Matting。保留所有权利。"
+  },
+  "about": {
+    "title": "关于我们",
+    "description": "这里是对公司的一段简短介绍……"
+  },
+  "careers": {
+    "title": "招贤纳士",
+    "description": "查看我们开放的职位……"
+  },
+  "press": {
+    "title": "新闻中心",
+    "description": "以下是我们的最新新闻稿……"
+  },
+  "common": {
+    "currentLanguage": "当前语言"
   }
 }

@@ -32,17 +32,29 @@
     "free": {
       "title": "Free",
       "price": "$0",
-      "features": ["5 images per month", "Basic editing tools", "Standard support"]
+      "features": [
+        "5 images per month",
+        "Basic editing tools",
+        "Standard support"
+      ]
     },
     "pro": {
       "title": "Pro",
       "price": "$19",
-      "features": ["500 images per month", "Advanced editing tools", "Priority support"]
+      "features": [
+        "500 images per month",
+        "Advanced editing tools",
+        "Priority support"
+      ]
     },
     "enterprise": {
       "title": "Enterprise",
       "price": "Custom",
-      "features": ["Unlimited images", "API access", "Dedicated support"]
+      "features": [
+        "Unlimited images",
+        "API access",
+        "Dedicated support"
+      ]
     }
   },
   "faq": {
@@ -90,7 +102,8 @@
       "title": "Resources",
       "docs": "Documentation",
       "blog": "Blog",
-      "help": "Help Center"
+      "help": "Help Center",
+      "manage": "Manage System"
     },
     "legal": {
       "title": "Legal",
@@ -105,5 +118,20 @@
       "linkedin": "LinkedIn"
     },
     "copyright": "© 2024 AI Matting. All rights reserved."
+  },
+  "about": {
+    "title": "About Us",
+    "description": "A short introduction about the company..."
+  },
+  "careers": {
+    "title": "Careers",
+    "description": "Check out our open positions..."
+  },
+  "press": {
+    "title": "Press",
+    "description": "Here are our latest press releases..."
+  },
+  "common": {
+    "currentLanguage": "Current language"
   }
 }

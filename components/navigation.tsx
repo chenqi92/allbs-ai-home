@@ -9,24 +9,13 @@ import {ThemeToggle} from '@/components/theme-toggle';
 import {LanguageToggle} from '@/components/language-toggle';
 import {cn} from '@/lib/utils';
 import {useTranslation} from '@/app/i18n/translation-context';
+import {useParams} from 'next/navigation';
 
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeItem, setActiveItem] = useState('/');
     const t = useTranslation();
-
-    const navItems = [
-        {
-            href: '#',
-            label: t.nav.home,
-            isHome: true,
-        },
-        {href: '#products', label: t.nav.products},
-        {href: '#features', label: t.nav.features},
-        {href: '#pricing', label: t.nav.pricing},
-        {href: '#faq', label: t.nav.faq},
-        {href: '#contact', label: t.nav.contact},
-    ];
+    const { lang } = useParams();
 
     function scrollToTop(e: React.MouseEvent<HTMLAnchorElement>) {
         e.preventDefault();
@@ -34,17 +23,42 @@ export function Navigation() {
         setActiveItem('#');
     }
 
+    function goHome(e: React.MouseEvent<HTMLAnchorElement>) {
+        e.preventDefault();
+        window.location.href = `/${lang}`;
+    }
+
+    const navItems = [
+        {href: '#products', label: t.nav.products},
+        {href: '#features', label: t.nav.features},
+        {href: '#pricing', label: t.nav.pricing},
+        {href: '#faq', label: t.nav.faq},
+        {href: '#contact', label: t.nav.contact},
+    ];
+
     return (
         <nav className="fixed w-full bg-background/80 backdrop-blur-sm z-50 border-b">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center space-x-2">
-                        <span className="text-xl font-bold">AI Matting</span>
+                    <Link
+                        href={`/${lang}`}
+                        onClick={goHome}
+                        className="flex items-center space-x-2"
+                    >
+                        <span className="text-xl font-bold">AI Matting Pro</span>
                     </Link>
 
-                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
+                        <Link
+                            href="#"
+                            className={cn(
+                                'text-sm font-medium transition-colors hover:text-primary',
+                                activeItem === '#' ? 'text-primary' : 'text-muted-foreground'
+                            )}
+                            onClick={scrollToTop}
+                        >
+                            {t.nav.home}
+                        </Link>
                         {navItems.map((item) => {
                             const linkProps = {
                                 href: item.href,
@@ -54,7 +68,7 @@ export function Navigation() {
                                         ? 'text-primary'
                                         : 'text-muted-foreground'
                                 ),
-                                onClick: item.isHome ? scrollToTop : () => setActiveItem(item.href),
+                                onClick: () => setActiveItem(item.href),
                             };
                             return (
                                 <Link key={item.href} {...linkProps}>
@@ -64,13 +78,11 @@ export function Navigation() {
                         })}
                     </div>
 
-                    {/* Theme and Language Toggles */}
                     <div className="hidden md:flex items-center space-x-4">
                         <ThemeToggle/>
                         <LanguageToggle/>
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <Button
                         variant="ghost"
                         size="icon"
@@ -81,7 +93,6 @@ export function Navigation() {
                     </Button>
                 </div>
 
-                {/* Mobile Navigation */}
                 {isOpen && (
                     <motion.div
                         initial={{opacity: 0, y: -10}}
@@ -90,6 +101,23 @@ export function Navigation() {
                         className="md:hidden py-4"
                     >
                         <div className="flex flex-col space-y-4">
+                            <Link
+                                href="#"
+                                className={cn(
+                                    'text-sm font-medium transition-colors hover:text-primary px-4 py-2 rounded-md',
+                                    activeItem === '#'
+                                        ? 'bg-primary/10 text-primary'
+                                        : 'text-muted-foreground'
+                                )}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    scrollToTop(e);
+                                    setIsOpen(false);
+                                }}
+                            >
+                                {t.nav.home}
+                            </Link>
+
                             {navItems.map((item) => {
                                 const linkProps = {
                                     href: item.href,
@@ -99,14 +127,8 @@ export function Navigation() {
                                             ? 'bg-primary/10 text-primary'
                                             : 'text-muted-foreground'
                                     ),
-                                    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
-                                        if (item.isHome) {
-                                            e.preventDefault();
-                                            window.scrollTo({top: 0, behavior: 'smooth'});
-                                            setActiveItem('#');
-                                        } else {
-                                            setActiveItem(item.href);
-                                        }
+                                    onClick: () => {
+                                        setActiveItem(item.href);
                                         setIsOpen(false);
                                     },
                                 };
