@@ -3,17 +3,19 @@
 import Link from 'next/link';
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { useTranslation } from '@/app/i18n/translation-context';
+import { useParams } from 'next/navigation';
 
 export function Footer() {
   const t = useTranslation();
+  const { lang } = useParams();
 
   const footerSections = [
     {
       title: t.footer.company.title,
       links: [
-        { label: t.footer.company.about, href: '/about' },
-        { label: t.footer.company.careers, href: '/careers' },
-        { label: t.footer.company.press, href: '/press' },
+        { label: t.footer.company.about, href: `/${lang}/about` },
+        { label: t.footer.company.careers, href: `/${lang}/careers` },
+        { label: t.footer.company.press, href: `/${lang}/press` },
       ],
     },
     {
@@ -49,7 +51,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-muted/50 border-t">
+    <footer id="contact" className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {footerSections.map((section) => (

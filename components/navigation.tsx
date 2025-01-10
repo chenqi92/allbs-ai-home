@@ -16,12 +16,12 @@ export function Navigation() {
   const t = useTranslation();
 
   const navItems = [
-    { href: '/', label: t.nav.home },
-    { href: '/products', label: t.nav.products },
-    { href: '/features', label: t.nav.features },
-    { href: '/pricing', label: t.nav.pricing },
-    { href: '/faq', label: t.nav.faq },
-    { href: '/contact', label: t.nav.contact },
+    { href: '#home', label: t.nav.home },
+    { href: '#products', label: t.nav.products },
+    { href: '#features', label: t.nav.features },
+    { href: '#pricing', label: t.nav.pricing },
+    { href: '#faq', label: t.nav.faq },
+    { href: '#contact', label: t.nav.contact },
   ];
 
   return (

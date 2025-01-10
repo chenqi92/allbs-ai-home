@@ -12,11 +12,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from '@/app/i18n/translation-context';
+import { useParams } from 'next/navigation';
 
 export function FAQ() {
   const t = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('general');
+  const { lang } = useParams();
 
   const faqCategories = [
     { value: 'general', label: t.faq.categories.general },
@@ -41,7 +43,7 @@ export function FAQ() {
   ];
 
   return (
-    <section className="py-16">
+    <section id="faq" className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
           {t.faq.title}
