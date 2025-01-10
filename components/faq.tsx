@@ -11,45 +11,46 @@ import {
 } from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-const faqCategories = [
-  { value: 'general', label: 'faq.categories.general' },
-  { value: 'technical', label: 'faq.categories.technical' },
-  { value: 'pricing', label: 'faq.categories.pricing' },
-  { value: 'support', label: 'faq.categories.support' },
-];
-
-const faqItems = [
-  {
-    category: 'general',
-    items: ['what_is', 'how_accurate'],
-  },
-  {
-    category: 'technical',
-    items: ['supported_formats'],
-  },
-  {
-    category: 'pricing',
-    items: ['refund_policy'],
-  },
-];
+import { useTranslation } from '@/app/i18n/translation-context';
 
 export function FAQ() {
+  const t = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('general');
+
+  const faqCategories = [
+    { value: 'general', label: t.faq.categories.general },
+    { value: 'technical', label: t.faq.categories.technical },
+    { value: 'pricing', label: t.faq.categories.pricing },
+    { value: 'support', label: t.faq.categories.support },
+  ];
+
+  const faqItems = [
+    {
+      category: 'general',
+      items: ['what_is', 'how_accurate'],
+    },
+    {
+      category: 'technical',
+      items: ['supported_formats'],
+    },
+    {
+      category: 'pricing',
+      items: ['refund_policy'],
+    },
+  ];
 
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
-          faq.title
+          {t.faq.title}
         </h2>
 
-        {/* Search */}
         <div className="max-w-md mx-auto mb-8 relative">
           <Input
             type="text"
-            placeholder="faq.search"
+            placeholder={t.faq.search}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -57,7 +58,6 @@ export function FAQ() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         </div>
 
-        {/* Categories */}
         <Tabs
           defaultValue="general"
           value={activeCategory}
@@ -72,7 +72,6 @@ export function FAQ() {
             ))}
           </TabsList>
 
-          {/* FAQ Items */}
           <AnimatePresence mode="wait">
             {faqCategories.map((category) => (
               <TabsContent
@@ -92,10 +91,10 @@ export function FAQ() {
                       ?.items.map((questionKey) => (
                         <AccordionItem key={questionKey} value={questionKey}>
                           <AccordionTrigger>
-                            {`faq.questions.${questionKey}.question`}
+                            {t.faq.questions[questionKey].question}
                           </AccordionTrigger>
                           <AccordionContent>
-                            {`faq.questions.${questionKey}.answer`}
+                            {t.faq.questions[questionKey].answer}
                           </AccordionContent>
                         </AccordionItem>
                       ))}

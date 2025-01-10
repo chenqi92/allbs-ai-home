@@ -8,19 +8,21 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageToggle } from '@/components/language-toggle';
 import { cn } from '@/lib/utils';
-
-const navItems = [
-  { href: '/', label: 'nav.home' },
-  { href: '/products', label: 'nav.products' },
-  { href: '/features', label: 'nav.features' },
-  { href: '/pricing', label: 'nav.pricing' },
-  { href: '/faq', label: 'nav.faq' },
-  { href: '/contact', label: 'nav.contact' },
-];
+import { useTranslation } from '@/app/i18n/translation-context';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
+  const t = useTranslation();
+
+  const navItems = [
+    { href: '/', label: t.nav.home },
+    { href: '/products', label: t.nav.products },
+    { href: '/features', label: t.nav.features },
+    { href: '/pricing', label: t.nav.pricing },
+    { href: '/faq', label: t.nav.faq },
+    { href: '/contact', label: t.nav.contact },
+  ];
 
   return (
     <nav className="fixed w-full bg-background/80 backdrop-blur-sm z-50 border-b">
