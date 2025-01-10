@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "pricing": "Pricing",
+    "features": "Features",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "AI-Powered Image Background Removal",
+    "subtitle": "Professional results in seconds with advanced AI technology",
+    "cta": "Try for Free"
+  },
+  "features": {
+    "title": "Advanced Features",
+    "accuracy": {
+      "title": "Pixel-Perfect Accuracy",
+      "description": "Our AI precisely detects and removes backgrounds with incredible detail"
+    },
+    "speed": {
+      "title": "Lightning Fast",
+      "description": "Process images in seconds, not minutes"
+    },
+    "batch": {
+      "title": "Batch Processing",
+      "description": "Remove backgrounds from multiple images simultaneously"
+    }
+  },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "free": {
+      "title": "Free",
+      "price": "$0",
+      "features": ["5 images per month", "Basic editing tools", "Standard support"]
+    },
+    "pro": {
+      "title": "Pro",
+      "price": "$19",
+      "features": ["500 images per month", "Advanced editing tools", "Priority support"]
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "price": "Custom",
+      "features": ["Unlimited images", "API access", "Dedicated support"]
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "search": "Search questions...",
+    "categories": {
+      "general": "General",
+      "technical": "Technical",
+      "pricing": "Pricing",
+      "support": "Support"
+    },
+    "questions": {
+      "what_is": {
+        "question": "What is AI Image Matting?",
+        "answer": "AI Image Matting is an advanced technology that uses artificial intelligence to automatically remove backgrounds from images with high precision."
+      },
+      "how_accurate": {
+        "question": "How accurate is the AI?",
+        "answer": "Our AI achieves over 99% accuracy in most cases, thanks to advanced deep learning algorithms trained on millions of images."
+      },
+      "supported_formats": {
+        "question": "What image formats are supported?",
+        "answer": "We support all major image formats including JPG, PNG, WEBP, and TIFF. Maximum file size is 50MB."
+      },
+      "refund_policy": {
+        "question": "What's your refund policy?",
+        "answer": "We offer a 30-day money-back guarantee for all paid plans. No questions asked."
+      }
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "press": "Press"
+    },
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "api": "API"
+    },
+    "resources": {
+      "title": "Resources",
+      "docs": "Documentation",
+      "blog": "Blog",
+      "help": "Help Center"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "social": {
+      "title": "Follow Us",
+      "twitter": "Twitter",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "© 2024 AI Matting. All rights reserved."
+  }
+}

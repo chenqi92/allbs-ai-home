@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "pricing": "定价",
+    "features": "功能",
+    "faq": "常见问题",
+    "contact": "联系我们"
+  },
+  "hero": {
+    "title": "AI智能抠图",
+    "subtitle": "先进AI技术，秒级出图",
+    "cta": "免费试用"
+  },
+  "features": {
+    "title": "核心功能",
+    "accuracy": {
+      "title": "像素级精准",
+      "description": "AI精确识别，完美去除背景"
+    },
+    "speed": {
+      "title": "极速处理",
+      "description": "秒级出图，效率倍增"
+    },
+    "batch": {
+      "title": "批量处理",
+      "description": "同时处理多张图片"
+    }
+  },
+  "pricing": {
+    "title": "选择套餐",
+    "free": {
+      "title": "免费版",
+      "price": "¥0",
+      "features": ["每月5张图片", "基础编辑工具", "标准支持"]
+    },
+    "pro": {
+      "title": "专业版",
+      "price": "¥129",
+      "features": ["每月500张图片", "高级编辑工具", "优先支持"]
+    },
+    "enterprise": {
+      "title": "企业版",
+      "price": "定制",
+      "features": ["无限图片", "API访问", "专属支持"]
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "search": "搜索问题...",
+    "categories": {
+      "general": "基础问题",
+      "technical": "技术问题",
+      "pricing": "价格问题",
+      "support": "支持服务"
+    },
+    "questions": {
+      "what_is": {
+        "question": "什么是AI抠图？",
+        "answer": "AI抠图是一种使用人工智能技术自动从图片中精确移除背景的先进技术。"
+      },
+      "how_accurate": {
+        "question": "AI的准确率如何？",
+        "answer": "得益于经过数百万图片训练的深度学习算法，我们的AI在大多数情况下能达到99%以上的准确率。"
+      },
+      "supported_formats": {
+        "question": "支持哪些图片格式？",
+        "answer": "我们支持所有主流图片格式，包括JPG、PNG、WEBP和TIFF。最大文件大小为50MB。"
+      },
+      "refund_policy": {
+        "question": "退款政策是什么？",
+        "answer": "我们为所有付费计划提供30天无条件退款保证。"
+      }
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "公司",
+      "about": "关于我们",
+      "careers": "招贤纳士",
+      "press": "新闻中心"
+    },
+    "product": {
+      "title": "产品",
+      "features": "功能特性",
+      "pricing": "定价方案",
+      "api": "API接口"
+    },
+    "resources": {
+      "title": "资源",
+      "docs": "开发文档",
+      "blog": "博客",
+      "help": "帮助中心"
+    },
+    "legal": {
+      "title": "法律",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "cookies": "Cookie政策"
+    },
+    "social": {
+      "title": "关注我们",
+      "twitter": "Twitter",
+      "github": "GitHub",
+      "linkedin": "领英"
+    },
+    "copyright": "© 2024 AI Matting。保留所有权利。"
+  }
+}
