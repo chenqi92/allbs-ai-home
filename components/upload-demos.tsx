@@ -138,7 +138,7 @@ export function UploadDemos() {
             setIsUploading(true);
 
             try {
-                const data = await api.upload<UploadResponse>('/minio/upload', file);
+                const data = await api.upload<UploadResponse>('/api/minio/upload', file);
 
                 if (data.code === 200 && data.data?.url) {
                     const fileInfo: FileInfo = {
