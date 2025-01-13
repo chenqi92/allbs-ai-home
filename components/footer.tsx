@@ -30,10 +30,22 @@ export function Footer() {
     {
       title: t.footer.resources.title,
       links: [
-        { label: t.footer.resources.docs, href: 'https://blog.allbs.cn' },
-        { label: t.footer.resources.blog, href: 'https://blog.allbs.cn' },
+        {
+          label: t.footer.resources.docs,
+          href: 'https://blog.allbs.cn',
+          external: true
+        },
+        {
+          label: t.footer.resources.blog,
+          href: 'https://blog.allbs.cn',
+          external: true
+        },
         { label: t.footer.resources.help, href: '/help' },
-        { label: t.footer.resources.manage, href: 'https://m.allbs.cn' },
+        {
+          label: t.footer.resources.manage,
+          href: 'https://m.allbs.cn',
+          external: true
+        },
       ],
     },
     {
@@ -54,7 +66,7 @@ export function Footer() {
   ];
 
   return (
-    <footer id="footer" className="bg-muted/50 border-t">
+    <footer id="contact" className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
         {/* 多列区块 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -66,6 +78,8 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
@@ -81,7 +95,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              {t.footer.copyright}
+              {t.footer.copyright.replace('AI Matting', lang === 'en' ? 'ALLBS' : '共赴良策')}
             </p>
             <div className="flex space-x-6">
               {socialLinks.map((social) => {

@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Wand2 } from 'lucide-react';
+import { useTranslation } from '@/app/i18n/translation-context';
 
 export function Hero() {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslation();
 
   return (
     <section className="pt-32 pb-16 px-4">
@@ -17,10 +19,10 @@ export function Hero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-            AI-Powered Image Background Removal
+            {t.hero.title}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Professional results in seconds with advanced AI technology
+            {t.hero.subtitle}
           </p>
           <Button
             size="lg"
@@ -28,7 +30,7 @@ export function Hero() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            Try for Free
+            {t.hero.cta}
             <motion.span
               animate={{ x: isHovered ? 5 : 0 }}
               transition={{ duration: 0.2 }}

@@ -15,12 +15,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { useTranslation } from '@/app/i18n/translation-context';
 
 export function Auth() {
     const [isOpen, setIsOpen] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const t = useTranslation();
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,24 +33,24 @@ export function Auth() {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline">登录</Button>
+                <Button variant="outline">{t.auth.loginButton}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>用户登录</DialogTitle>
+                    <DialogTitle>{t.auth.loginTitle}</DialogTitle>
                     <DialogDescription>
-                        登录后即可使用所有AI图片处理功能
+                        {t.auth.loginDescription}
                     </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="email">邮箱</Label>
+                        <Label htmlFor="email">{t.auth.emailLabel}</Label>
                         <div className="relative">
                             <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                             <Input
                                 id="email"
                                 type="email"
-                                placeholder="请输入邮箱"
+                                placeholder={t.auth.emailLabel}
                                 className="pl-10"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -57,13 +59,13 @@ export function Auth() {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="password">密码</Label>
+                        <Label htmlFor="password">{t.auth.passwordLabel}</Label>
                         <div className="relative">
                             <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                             <Input
                                 id="password"
                                 type="password"
-                                placeholder="请输入密码"
+                                placeholder={t.auth.passwordLabel}
                                 className="pl-10"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -79,15 +81,15 @@ export function Auth() {
                                 onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                             />
                             <Label htmlFor="remember" className="text-sm">
-                                记住登录状态
+                                {t.auth.rememberMeLabel}
                             </Label>
                         </div>
                         <Button variant="link" className="text-sm">
-                            忘记密码？
+                            {t.auth.forgotPassword}
                         </Button>
                     </div>
                     <Button type="submit" className="w-full">
-                        登录
+                        {t.auth.loginButton}
                     </Button>
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
@@ -95,7 +97,7 @@ export function Auth() {
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                或使用第三方账号登录
+                {t.auth.orLoginWith}
               </span>
                         </div>
                     </div>

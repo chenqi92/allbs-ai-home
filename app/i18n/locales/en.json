@@ -8,27 +8,40 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "AI-Powered Image Background Removal",
-    "subtitle": "Professional results in seconds with advanced AI technology",
+    "title": "Comprehensive AI Solutions Platform",
+    "subtitle": "Empowering your workflow with cutting-edge AI technologies",
     "cta": "Try for Free"
   },
   "features": {
     "title": "Advanced Features",
-    "accuracy": {
-      "title": "Pixel-Perfect Accuracy",
-      "description": "Our AI precisely detects and removes backgrounds with incredible detail"
+    "imageProcessing": {
+      "title": "AI Image Processing",
+      "description": "Professional background removal and image enhancement with pixel-perfect accuracy"
     },
-    "speed": {
-      "title": "Lightning Fast",
-      "description": "Process images in seconds, not minutes"
+    "idPhoto": {
+      "title": "Smart ID Photos",
+      "description": "Automated ID photo creation with size adjustment and background options"
     },
-    "batch": {
+    "filePreview": {
+      "title": "Universal File Preview",
+      "description": "Preview various file formats directly in browser"
+    },
+    "batchProcessing": {
       "title": "Batch Processing",
-      "description": "Remove backgrounds from multiple images simultaneously"
+      "description": "Handle multiple files simultaneously with high efficiency"
+    },
+    "aiEnhancement": {
+      "title": "AI Enhancement",
+      "description": "Smart image optimization and enhancement powered by AI"
+    },
+    "cloudStorage": {
+      "title": "Cloud Storage",
+      "description": "Secure cloud storage with easy access to your processed files"
     }
   },
   "pricing": {
     "title": "Choose Your Plan",
+    "getStarted": "Get Started",
     "free": {
       "title": "Free",
       "price": "$0",
@@ -44,7 +57,8 @@
       "features": [
         "500 images per month",
         "Advanced editing tools",
-        "Priority support"
+        "Priority support",
+        "API access"
       ]
     },
     "enterprise": {
@@ -52,8 +66,9 @@
       "price": "Custom",
       "features": [
         "Unlimited images",
-        "API access",
-        "Dedicated support"
+        "Custom integration",
+        "Dedicated support",
+        "SLA guarantee"
       ]
     }
   },
@@ -68,20 +83,64 @@
     },
     "questions": {
       "what_is": {
-        "question": "What is AI Image Matting?",
-        "answer": "AI Image Matting is an advanced technology that uses artificial intelligence to automatically remove backgrounds from images with high precision."
+        "question": "What services does ALLBS provide?",
+        "answer": "ALLBS offers a comprehensive suite of AI-powered solutions including image processing, ID photo creation, file preview and management, and more."
       },
       "how_accurate": {
         "question": "How accurate is the AI?",
         "answer": "Our AI achieves over 99% accuracy in most cases, thanks to advanced deep learning algorithms trained on millions of images."
       },
+      "id_photo": {
+        "question": "How does the ID photo feature work?",
+        "answer": "Our AI automatically detects face position, adjusts photo size, and provides various background colors to meet different ID photo requirements."
+      },
+      "file_preview": {
+        "question": "What file types are supported for preview?",
+        "answer": "We support most common file formats including images (JPG, PNG, WEBP), documents (PDF, DOC), and more."
+      },
       "supported_formats": {
         "question": "What image formats are supported?",
         "answer": "We support all major image formats including JPG, PNG, WEBP, and TIFF. Maximum file size is 50MB."
       },
+      "cloud_storage": {
+        "question": "How secure is the cloud storage?",
+        "answer": "We use industry-standard encryption and security measures to protect your files. All data is stored in compliance with privacy regulations."
+      },
       "refund_policy": {
         "question": "What's your refund policy?",
         "answer": "We offer a 30-day money-back guarantee for all paid plans. No questions asked."
+      },
+      "ai_features": {
+        "question": "What AI features are available?",
+        "answer": "Our platform offers multiple AI capabilities including image background removal, ID photo generation, image enhancement, face detection, and smart cropping. All features are continuously updated with the latest AI technologies."
+      },
+      "batch_limits": {
+        "question": "What are the batch processing limits?",
+        "answer": "Batch processing limits vary by plan. Free users can process up to 5 files simultaneously, Pro users up to 100 files, and Enterprise users have unlimited batch processing capability."
+      },
+      "processing_time": {
+        "question": "How long does processing take?",
+        "answer": "Most single file operations complete within seconds. Batch processing time depends on file quantity and size, but our system optimizes processing for maximum efficiency."
+      },
+      "output_quality": {
+        "question": "What about the output quality?",
+        "answer": "We maintain high output quality across all features. Images are processed at their original resolution with options to adjust quality and file size as needed."
+      },
+      "data_privacy": {
+        "question": "How do you handle data privacy?",
+        "answer": "We take data privacy seriously. All uploads are encrypted, processed in isolated environments, and automatically deleted after processing unless cloud storage is enabled. We comply with GDPR and other privacy regulations."
+      },
+      "api_integration": {
+        "question": "Can I integrate these features into my own application?",
+        "answer": "Yes, we provide comprehensive API access for Pro and Enterprise users. Our API documentation includes examples in multiple programming languages and dedicated technical support."
+      },
+      "supported_browsers": {
+        "question": "Which browsers are supported?",
+        "answer": "Our platform works on all modern browsers including Chrome, Firefox, Safari, and Edge. We recommend keeping your browser updated for the best experience."
+      },
+      "offline_access": {
+        "question": "Is offline access available?",
+        "answer": "While our platform is primarily cloud-based, Enterprise customers can request on-premises deployment for specific features. Contact our sales team for details."
       }
     }
   },
@@ -133,5 +192,46 @@
   },
   "common": {
     "currentLanguage": "Current language"
-  }
+  },
+  "productsPage": {
+    "title": "AI Image Processing Products",
+    "bgRemoval": {
+      "title": "AI Background Removal",
+      "description": "Remove backgrounds with one click, preserving full detail",
+      "features": [
+        "Smart foreground detection",
+        "Precise hair edge handling",
+        "Batch processing supported",
+        "Transparent background output"
+      ],
+      "buttonText": "Use Now"
+    },
+    "idPhoto": {
+      "title": "AI ID Photo Creation",
+      "description": "Generate standard ID photos quickly, supporting multiple sizes",
+      "features": [
+        "Smart portrait enhancement",
+        "Standard size cropping",
+        "Multiple background colors",
+        "Real-time preview"
+      ],
+      "buttonText": "Start Making"
+    }
+  },
+  "auth": {
+    "loginTitle": "User Login",
+    "loginDescription": "Log in to access all AI image processing features",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "rememberMeLabel": "Remember Me",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Login",
+    "orLoginWith": "Or Sign In With"
+  },
+  "uploadDemos": {
+    "filePreviewTitle": "File Preview",
+    "dragOrClickFile": "Drag files here or click to upload",
+    "downloadFile": "Download File"
+  },
+  "productsHeroTitle": "AI Image Processing Products"
 }

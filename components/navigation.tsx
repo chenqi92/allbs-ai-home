@@ -50,7 +50,9 @@ export function Navigation() {
                         onClick={goHome}
                         className="flex items-center space-x-2"
                     >
-                        <span className="text-xl font-bold">AI Matting Pro</span>
+                        <span className="text-xl font-bold">
+                            {lang === 'en' ? 'ALLBS' : '共赴良策'}
+                        </span>
                     </Link>
 
                     <div className="hidden md:flex items-center space-x-8">

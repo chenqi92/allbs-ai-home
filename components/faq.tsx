@@ -31,15 +31,25 @@ export function FAQ() {
   const faqItems = [
     {
       category: 'general',
-      items: ['what_is', 'how_accurate'],
+      items: ['what_is', 'ai_features', 'processing_time', 'output_quality'],
     },
     {
       category: 'technical',
-      items: ['supported_formats'],
+      items: [
+        'supported_formats',
+        'batch_limits',
+        'supported_browsers',
+        'offline_access',
+        'api_integration'
+      ],
     },
     {
       category: 'pricing',
       items: ['refund_policy'],
+    },
+    {
+      category: 'support',
+      items: ['data_privacy', 'cloud_storage'],
     },
   ];
 

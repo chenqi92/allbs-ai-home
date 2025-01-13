@@ -6,6 +6,7 @@ import {Upload, Download, Image as ImageIcon, File} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {cn} from '@/lib/utils';
+import { useTranslation } from '@/app/i18n/translation-context';
 
 interface FileInfo {
     name: string;
@@ -20,6 +21,7 @@ export function UploadDemos() {
     const [generalFile, setGeneralFile] = useState<FileInfo | null>(null);
     const [isDraggingImage, setIsDraggingImage] = useState(false);
     const [isDraggingFile, setIsDraggingFile] = useState(false);
+    const t = useTranslation();
 
     const handleDrag = (e: React.DragEvent, isDragging: boolean, setIsDragging: (value: boolean) => void) => {
         e.preventDefault();
@@ -172,7 +174,7 @@ export function UploadDemos() {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <File className="h-5 w-5"/>
-                            文件预览
+                            {t.uploadDemos.filePreviewTitle}
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -205,7 +207,7 @@ export function UploadDemos() {
                             <div className="text-center">
                                 <Upload className="mx-auto h-12 w-12 text-muted-foreground/50"/>
                                 <p className="mt-2 text-sm text-muted-foreground">
-                                    支持任意文件格式，拖拽文件到此处或点击上传
+                                    {t.uploadDemos.dragOrClickFile}
                                 </p>
                             </div>
                         </div>
@@ -231,7 +233,7 @@ export function UploadDemos() {
                                 </div>
                                 <Button className="w-full">
                                     <Download className="mr-2 h-4 w-4"/>
-                                    下载文件
+                                    {t.uploadDemos.downloadFile}
                                 </Button>
                             </motion.div>
                         )}

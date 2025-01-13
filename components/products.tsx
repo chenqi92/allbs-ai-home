@@ -10,6 +10,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { useTranslation } from '@/app/i18n/translation-context';
 
 const products = [
     {
@@ -43,52 +44,65 @@ const products = [
 ];
 
 export function Products() {
+    const t = useTranslation();
+
     return (
-        <section className="py-16 bg-gradient-to-b from-background to-muted/50">
+        <section id="products" className="py-16 bg-gradient-to-b from-background to-muted/50">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-12">AI图片处理产品</h2>
+                <h2 className="text-3xl font-bold text-center mb-12">
+                    {t.productsPage.title}
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {products.map((product) => (
-                        <motion.div
-                            key={product.id}
-                            initial={{opacity: 0, y: 20}}
-                            whileInView={{opacity: 1, y: 0}}
-                            transition={{duration: 0.5}}
-                            viewport={{once: true}}
-                        >
-                            <Card className="h-full hover:shadow-lg transition-shadow">
-                                <CardHeader>
-                                    <div className="flex items-center space-x-2">
-                                        {product.icon}
-                                        <CardTitle>{product.title}</CardTitle>
-                                    </div>
-                                    <CardDescription>{product.description}</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="mb-6">
-                                        <img
-                                            src={product.demoImage}
-                                            alt={product.title}
-                                            className="w-full h-48 object-cover rounded-lg mb-4"
-                                        />
-                                        <ul className="space-y-2">
-                                            {product.features.map((feature, index) => (
-                                                <li key={index} className="flex items-center space-x-2">
-                                                    <span className="text-primary">✓</span>
-                                                    <span>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <Button className="w-full group">
-                                        {product.buttonText}
-                                        <ArrowRight
-                                            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"/>
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
+                    {products.map((product) => {
+                        const content = product.id === 'bg-removal'
+                          ? t.productsPage.bgRemoval
+                          : t.productsPage.idPhoto;
+
+                        return (
+                            <motion.div
+                                key={product.id}
+                                initial={{opacity: 0, y: 20}}
+                                whileInView={{opacity: 1, y: 0}}
+                                transition={{duration: 0.5}}
+                                viewport={{once: true}}
+                            >
+                                <Card className="h-full hover:shadow-lg transition-shadow">
+                                    <CardHeader>
+                                        <div className="flex items-center space-x-2">
+                                            {product.icon}
+                                            <CardTitle>{content.title}</CardTitle>
+                                        </div>
+                                        <CardDescription>
+                                            {content.description}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="mb-6">
+                                            <img
+                                                src={product.demoImage}
+                                                alt={content.title}
+                                                className="w-full h-48 object-cover rounded-lg mb-4"
+                                            />
+                                            <ul className="space-y-2">
+                                                {content.features.map((feature: string, index: number) => (
+                                                    <li key={index} className="flex items-center space-x-2">
+                                                        <span className="text-primary">✓</span>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <Button className="w-full group">
+                                            {content.buttonText}
+                                            <ArrowRight
+                                                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                                            />
+                                        </Button>
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

@@ -8,27 +8,40 @@
     "contact": "联系我们"
   },
   "hero": {
-    "title": "AI智能抠图",
-    "subtitle": "先进AI技术，秒级出图",
+    "title": "AI综合解决方案平台",
+    "subtitle": "以先进AI技术赋能您的工作流程",
     "cta": "免费试用"
   },
   "features": {
     "title": "核心功能",
-    "accuracy": {
-      "title": "像素级精准",
-      "description": "AI精确识别，完美去除背景"
+    "imageProcessing": {
+      "title": "AI图像处理",
+      "description": "专业的背景去除和图像增强，像素级精准度"
     },
-    "speed": {
-      "title": "极速处理",
-      "description": "秒级出图，效率倍增"
+    "idPhoto": {
+      "title": "智能证件照",
+      "description": "自动证件照制作，支持尺寸调整和背景选择"
     },
-    "batch": {
+    "filePreview": {
+      "title": "通用文件预览",
+      "description": "浏览器中直接预览各种格式文件"
+    },
+    "batchProcessing": {
       "title": "批量处理",
-      "description": "同时处理多张图片"
+      "description": "高效处理多个文件，提升工作效率"
+    },
+    "aiEnhancement": {
+      "title": "AI增强",
+      "description": "智能图像优化和增强，品质更出众"
+    },
+    "cloudStorage": {
+      "title": "云端存储",
+      "description": "安全的云存储服务，随时访问处理后的文件"
     }
   },
   "pricing": {
     "title": "选择套餐",
+    "getStarted": "立即开始",
     "free": {
       "title": "免费版",
       "price": "¥0",
@@ -44,7 +57,8 @@
       "features": [
         "每月500张图片",
         "高级编辑工具",
-        "优先支持"
+        "优先支持",
+        "API访问"
       ]
     },
     "enterprise": {
@@ -52,8 +66,9 @@
       "price": "定制",
       "features": [
         "无限图片",
-        "API访问",
-        "专属支持"
+        "定制集成",
+        "专属支持",
+        "SLA保障"
       ]
     }
   },
@@ -68,20 +83,64 @@
     },
     "questions": {
       "what_is": {
-        "question": "什么是AI抠图？",
-        "answer": "AI抠图是一种使用人工智能技术自动从图片中精确移除背景的先进技术。"
+        "question": "共赴良策提供哪些服务？",
+        "answer": "共赴良策提供全方位的AI驱动解决方案，包括图像处理、证件照制作、文件预览和管理等多项服务。"
       },
       "how_accurate": {
         "question": "AI的准确率如何？",
         "answer": "得益于经过数百万图片训练的深度学习算法，我们的AI在大多数情况下能达到99%以上的准确率。"
       },
+      "id_photo": {
+        "question": "智能证件照功能是如何工作的？",
+        "answer": "我们的AI会自动检测面部位置，调整照片尺寸，并提供多种背景颜色选择，满足不同证件照要求。"
+      },
+      "file_preview": {
+        "question": "支持预览哪些类型的文件？",
+        "answer": "我们支持大多数常见文件格式的预览，包括图片（JPG、PNG、WEBP）、文档（PDF、DOC）等。"
+      },
       "supported_formats": {
         "question": "支持哪些图片格式？",
         "answer": "我们支持所有主流图片格式，包括JPG、PNG、WEBP和TIFF。最大文件大小为50MB。"
       },
+      "cloud_storage": {
+        "question": "云存储的安全性如何？",
+        "answer": "我们使用行业标准的加密和安全措施保护您的文件。所有数据存储均符合隐私法规要求。"
+      },
       "refund_policy": {
         "question": "退款政策是什么？",
         "answer": "我们为所有付费计划提供30天无条件退款保证。"
+      },
+      "ai_features": {
+        "question": "提供哪些AI功能？",
+        "answer": "我们的平台提供多种AI功能，包括图像背景去除、证件照生成、图像增强、人脸检测和智能裁剪。所有功能都会持续更新以采用最新的AI技术。"
+      },
+      "batch_limits": {
+        "question": "批量处理有什么限制？",
+        "answer": "批量处理限制因套餐而异。免费用户可同时处理最多5个文件，专业版用户可处理100个文件，企业版用户则无限制。"
+      },
+      "processing_time": {
+        "question": "处理需要多长时间？",
+        "answer": "大多数单文件操作都能在几秒内完成。批量处理时间取决于文件数量和大小，但我们的系统会优化处理流程以确保最高效率。"
+      },
+      "output_quality": {
+        "question": "输出质量如何？",
+        "answer": "我们在所有功能中都保持高输出质量。图像会以原始分辨率处理，同时提供调整质量和文件大小的选项。"
+      },
+      "data_privacy": {
+        "question": "如何保护数据隐私？",
+        "answer": "我们严格保护数据隐私。所有上传都经过加密，在隔离环境中处理，处理完成后自动删除（除非启用云存储）。我们遵守GDPR等隐私法规。"
+      },
+      "api_integration": {
+        "question": "可以将这些功能集成到自己的应用中吗？",
+        "answer": "可以，我们为专业版和企业版用户提供完整的API访问。API文档包含多种编程语言的示例，并提供专门的技术支持。"
+      },
+      "supported_browsers": {
+        "question": "支持哪些浏览器？",
+        "answer": "我们的平台支持所有现代浏览器，包括Chrome、Firefox、Safari和Edge。建议保持浏览器更新以获得最佳体验。"
+      },
+      "offline_access": {
+        "question": "是否支持离线访问？",
+        "answer": "虽然我们的平台主要基于云服务，但企业版客户可以申请特定功能的本地部署。详情请联系我们的销售团队。"
       }
     }
   },
@@ -133,5 +192,46 @@
   },
   "common": {
     "currentLanguage": "当前语言"
-  }
+  },
+  "productsPage": {
+    "title": "AI图片处理产品",
+    "bgRemoval": {
+      "title": "AI智能抠图/去除背景",
+      "description": "一键智能去除背景，保留完整细节",
+      "features": [
+        "智能识别前景主体",
+        "精准处理毛发边缘",
+        "支持批量处理",
+        "透明背景输出"
+      ],
+      "buttonText": "立即使用"
+    },
+    "idPhoto": {
+      "title": "AI智能证件照制作",
+      "description": "快速生成标准证件照，支持多种规格",
+      "features": [
+        "智能人像优化",
+        "标准规格裁剪",
+        "多种底色可选",
+        "实时预览效果"
+      ],
+      "buttonText": "开始制作"
+    }
+  },
+  "auth": {
+    "loginTitle": "用户登录",
+    "loginDescription": "登录后即可使用所有AI图片处理功能",
+    "emailLabel": "邮箱",
+    "passwordLabel": "密码",
+    "rememberMeLabel": "记住登录状态",
+    "forgotPassword": "忘记密码？",
+    "loginButton": "登录",
+    "orLoginWith": "或使用第三方账号登录"
+  },
+  "uploadDemos": {
+    "filePreviewTitle": "文件预览",
+    "dragOrClickFile": "支持任意文件格式，拖拽文件到此处或点击上传",
+    "downloadFile": "下载文件"
+  },
+  "productsHeroTitle": "AI图片处理产品"
 }
