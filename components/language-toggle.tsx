@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
+import { Globe } from 'lucide-react';
 
 interface LanguageInfo {
   code: string;
@@ -65,8 +66,9 @@ export function LanguageToggle() {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="uppercase">
-          {currentLabel}
+        <Button variant="ghost" size="icon">
+          <Globe className="h-5 w-5" />
+          <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>
 

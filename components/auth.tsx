@@ -16,6 +16,8 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { useTranslation } from '@/app/i18n/translation-context';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 export function Auth() {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +25,8 @@ export function Auth() {
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const t = useTranslation();
+    const params = useParams();
+    const lang = params.lang as string;
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,9 +88,9 @@ export function Auth() {
                                 {t.auth.rememberMeLabel}
                             </Label>
                         </div>
-                        <Button variant="link" className="text-sm">
+                        <Link href={`/${lang}/recover-password`} className="text-sm text-muted-foreground hover:text-primary">
                             {t.auth.forgotPassword}
-                        </Button>
+                        </Link>
                     </div>
                     <Button type="submit" className="w-full">
                         {t.auth.loginButton}

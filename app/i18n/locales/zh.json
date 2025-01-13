@@ -226,7 +226,20 @@
     "rememberMeLabel": "记住登录状态",
     "forgotPassword": "忘记密码？",
     "loginButton": "登录",
-    "orLoginWith": "或使用第三方账号登录"
+    "orLoginWith": "或使用第三方账号登录",
+    "recoverPassword": {
+      "title": "找回密码",
+      "description": "输入您的注册邮箱，我们将发送密码重置链接",
+      "emailPlaceholder": "请输入邮箱地址",
+      "sendButton": "发送重置链接",
+      "backToLogin": "返回登录",
+      "emailRequired": "请输入邮箱地址",
+      "sendFailed": "发送重置邮件失败，请稍后重试",
+      "sendSuccess": "重置链接已发送到您的邮箱，请查收并按照提示完成密码重置。",
+      "checkSpam": "没有收到邮件？请检查垃圾邮件文件夹，或",
+      "resend": "重新发送",
+      "backToHome": "返回首页"
+    }
   },
   "uploadDemos": {
     "filePreviewTitle": "全能文件预览",
@@ -261,5 +274,11 @@
       "uploadFailed": "上传失败",
       "tryAgain": "请稍后重试"
     }
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "页面未找到",
+    "description": "抱歉，您访问的页面不存在或已被移除。请检查URL是否正确，或返回首页。",
+    "backToHome": "返回首页"
   }
 }

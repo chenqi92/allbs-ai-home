@@ -226,7 +226,20 @@
     "rememberMeLabel": "Remember Me",
     "forgotPassword": "Forgot password?",
     "loginButton": "Login",
-    "orLoginWith": "Or Sign In With"
+    "orLoginWith": "Or Sign In With",
+    "recoverPassword": {
+      "title": "Recover Password",
+      "description": "Enter your registered email and we'll send you a password reset link",
+      "emailPlaceholder": "Enter your email address",
+      "sendButton": "Send Reset Link",
+      "backToLogin": "Back to Login",
+      "emailRequired": "Please enter your email address",
+      "sendFailed": "Failed to send reset email, please try again later",
+      "sendSuccess": "Reset link has been sent to your email, please check and follow the instructions.",
+      "checkSpam": "Haven't received the email? Please check your spam folder or",
+      "resend": "resend",
+      "backToHome": "Back to Home"
+    }
   },
   "uploadDemos": {
     "filePreviewTitle": "Universal File Preview",
@@ -261,5 +274,11 @@
       "uploadFailed": "Upload failed",
       "tryAgain": "Please try again later"
     }
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page Not Found",
+    "description": "Sorry, the page you visited does not exist or has been removed. Please check the URL or return to homepage.",
+    "backToHome": "Back to Home"
   }
 }
