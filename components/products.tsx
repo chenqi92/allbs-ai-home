@@ -1,51 +1,96 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
-// 例如可能需要引入一些上传组件或 UI 组件
-// import { UploadImage } from '@/components/upload-image';
-// import { IDPhotoEditor } from '@/components/idphoto-editor';
+import {motion} from 'framer-motion';
+import {ImageOff, UserSquare2, ArrowRight} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 
-export default function Products() {
-  return (
-    <div id="products" className="space-y-12">
-      {/* 功能区 1：上传图片并抠图 */}
-      <section className="bg-white shadow p-6 rounded-md">
-        <h2 className="text-xl font-bold mb-4">上传图片并抠图</h2>
-        <p className="text-sm text-muted-foreground mb-4">
-          请选择需要去除背景的图片，我们会自动帮你进行 AI 抠图。
-        </p>
-        {/* 这里可以放置上传组件或其他交互逻辑 */}
-        {/* <UploadImage /> */}
-        {/* 示例占位 */}
-        <div className="border border-dashed border-gray-300 h-32 flex items-center justify-center text-gray-500">
-          上传图片组件占位
-        </div>
-      </section>
+const products = [
+    {
+        id: 'bg-removal',
+        title: 'AI智能抠图/去除背景',
+        description: '一键智能去除背景，保留完整细节',
+        features: [
+            '智能识别前景主体',
+            '精准处理毛发边缘',
+            '批量处理支持',
+            '透明背景输出'
+        ],
+        icon: <ImageOff className="h-6 w-6"/>,
+        buttonText: '立即使用',
+        demoImage: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+        id: 'id-photo',
+        title: 'AI智能证件照制作',
+        description: '快速生成标准证件照，支持多种规格',
+        features: [
+            '智能人像优化',
+            '标准规格裁剪',
+            '多种底色可选',
+            '实时预览效果'
+        ],
+        icon: <UserSquare2 className="h-6 w-6"/>,
+        buttonText: '开始制作',
+        demoImage: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=800&q=80'
+    }
+];
 
-      {/* 功能区 2：制作证件照 */}
-      <section className="bg-white shadow p-6 rounded-md">
-        <h2 className="text-xl font-bold mb-4">制作证件照</h2>
-        <p className="text-sm text-muted-foreground mb-4">
-          选择合适的尺寸和背景颜色，快速生成标准证件照。
-        </p>
-        {/* 这里可放置证件照生成逻辑 */}
-        {/* <IDPhotoEditor /> */}
-        <div className="border border-dashed border-gray-300 h-32 flex items-center justify-center text-gray-500">
-          证件照生成组件占位
-        </div>
-      </section>
-
-      {/* 其他功能区，用于扩展更多功能 */}
-      <section className="bg-white shadow p-6 rounded-md">
-        <h2 className="text-xl font-bold mb-4">更多功能</h2>
-        <p className="text-sm text-muted-foreground mb-4">
-          其他 AI 相关图像处理功能可在此添加。
-        </p>
-        <div className="border border-dashed border-gray-300 h-32 flex items-center justify-center text-gray-500">
-          功能扩展占位
-        </div>
-      </section>
-    </div>
-  );
-} 
+export function Products() {
+    return (
+        <section className="py-16 bg-gradient-to-b from-background to-muted/50">
+            <div className="container mx-auto px-4">
+                <h2 className="text-3xl font-bold text-center mb-12">AI图片处理产品</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {products.map((product) => (
+                        <motion.div
+                            key={product.id}
+                            initial={{opacity: 0, y: 20}}
+                            whileInView={{opacity: 1, y: 0}}
+                            transition={{duration: 0.5}}
+                            viewport={{once: true}}
+                        >
+                            <Card className="h-full hover:shadow-lg transition-shadow">
+                                <CardHeader>
+                                    <div className="flex items-center space-x-2">
+                                        {product.icon}
+                                        <CardTitle>{product.title}</CardTitle>
+                                    </div>
+                                    <CardDescription>{product.description}</CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="mb-6">
+                                        <img
+                                            src={product.demoImage}
+                                            alt={product.title}
+                                            className="w-full h-48 object-cover rounded-lg mb-4"
+                                        />
+                                        <ul className="space-y-2">
+                                            {product.features.map((feature, index) => (
+                                                <li key={index} className="flex items-center space-x-2">
+                                                    <span className="text-primary">✓</span>
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <Button className="w-full group">
+                                        {product.buttonText}
+                                        <ArrowRight
+                                            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"/>
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}

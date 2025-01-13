@@ -8,6 +8,7 @@ import {Button} from '@/components/ui/button';
 import {ThemeToggle} from '@/components/theme-toggle';
 import {LanguageToggle} from '@/components/language-toggle';
 import {cn} from '@/lib/utils';
+import {Auth} from '@/components/auth';
 import {useTranslation} from '@/app/i18n/translation-context';
 import {useParams} from 'next/navigation';
 
@@ -85,6 +86,7 @@ export function Navigation() {
                     <div className="hidden md:flex items-center space-x-4">
                         <ThemeToggle/>
                         <LanguageToggle/>
+                        <Auth />
                     </div>
 
                     <Button
@@ -146,6 +148,7 @@ export function Navigation() {
                             <div className="flex items-center space-x-4 px-4 pt-4 border-t">
                                 <ThemeToggle/>
                                 <LanguageToggle/>
+                                <Auth/>
                             </div>
                         </div>
                     </motion.div>
