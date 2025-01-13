@@ -1,14 +1,4 @@
-interface RequestConfig extends RequestInit {
-  params?: Record<string, string>;
-  data?: any;
-}
-
-interface ApiResponse<T = any> {
-  code: number;
-  msg: string;
-  data: T;
-  ok?: boolean;
-}
+import type { ApiResponse, RequestConfig, UploadResponse } from '@/types/api';
 
 class ApiClient {
   private baseUrl: string;
@@ -18,7 +8,7 @@ class ApiClient {
   }
 
   private async request<T>(endpoint: string, config: RequestConfig = {}): Promise<ApiResponse<T>> {
-    const { params, data, headers = {}, ...rest } = config;
+    const { params, data, headers: customHeaders = {}, ...rest } = config;
     
     // 构建完整的URL，包括查询参数
     let url = `${this.baseUrl}${endpoint}`;
@@ -30,9 +20,10 @@ class ApiClient {
       url += `?${searchParams.toString()}`;
     }
 
+    const headers = new Headers(customHeaders);
     // 如果是FormData，不设置Content-Type，让浏览器自动处理
     if (!(data instanceof FormData)) {
-      headers['Content-Type'] = 'application/json';
+      headers.set('Content-Type', 'application/json');
     }
 
     try {

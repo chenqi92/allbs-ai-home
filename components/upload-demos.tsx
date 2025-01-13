@@ -21,6 +21,7 @@ import {cn} from '@/lib/utils';
 import {useTranslation} from '@/app/i18n/translation-context';
 import {toast} from "@/hooks/use-toast";
 import api from '@/utils/api';
+import type {UploadResponse} from '@/types/api';
 
 interface FileInfo {
     name: string;
@@ -137,7 +138,7 @@ export function UploadDemos() {
             setIsUploading(true);
 
             try {
-                const data = await api.upload('/minio/upload', file);
+                const data = await api.upload<UploadResponse>('/minio/upload', file);
 
                 if (data.code === 200 && data.data?.url) {
                     const fileInfo: FileInfo = {
@@ -211,8 +212,9 @@ export function UploadDemos() {
                                         const file = e.target.files?.[0];
                                         if (file) {
                                             handleFileDrop({
-                                                preventDefault: () => {},
-                                                dataTransfer: { files: [file] }
+                                                preventDefault: () => {
+                                                },
+                                                dataTransfer: {files: [file]}
                                             } as unknown as React.DragEvent);
                                         }
                                     }}
@@ -238,8 +240,8 @@ export function UploadDemos() {
                             {isUploading && (
                                 <div className="text-center">
                                     <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
                                         className="inline-block"
                                     >
                                         {t.productDemos.filePreview.uploading}
