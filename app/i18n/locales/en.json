@@ -53,7 +53,7 @@
     },
     "pro": {
       "title": "Pro",
-      "price": "$19",
+      "price": "$1",
       "features": [
         "500 images per month",
         "Advanced editing tools",
@@ -229,9 +229,19 @@
     "orLoginWith": "Or Sign In With"
   },
   "uploadDemos": {
-    "filePreviewTitle": "File Preview",
+    "filePreviewTitle": "Universal File Preview",
     "dragOrClickFile": "Drag files here or click to upload",
-    "downloadFile": "Download File"
+    "previewFile": "Preview File",
+    "supportedFormats": {
+      "title": "Supported formats:",
+      "office": "• Office: DOC, DOCX, XLS, XLSX, PPT, PPTX, etc.",
+      "wps": "• WPS: WPS, DPS, ET, etc.",
+      "image": "• Images: JPG, PNG, GIF, PSD, etc.",
+      "document": "• Documents: PDF, OFD, RTF, TXT, etc.",
+      "model": "• 3D Models: OBJ, STL, FBX, DWG, etc.",
+      "media": "• Media: MP3, MP4, AVI, MOV, etc.",
+      "archive": "• Archives: ZIP, RAR, 7Z, etc."
+    }
   },
   "productsHeroTitle": "AI Image Processing Products"
 }

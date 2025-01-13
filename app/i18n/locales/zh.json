@@ -53,7 +53,7 @@
     },
     "pro": {
       "title": "专业版",
-      "price": "¥129",
+      "price": "¥1",
       "features": [
         "每月500张图片",
         "高级编辑工具",
@@ -229,9 +229,19 @@
     "orLoginWith": "或使用第三方账号登录"
   },
   "uploadDemos": {
-    "filePreviewTitle": "文件预览",
-    "dragOrClickFile": "支持任意文件格式，拖拽文件到此处或点击上传",
-    "downloadFile": "下载文件"
+    "filePreviewTitle": "全能文件预览",
+    "dragOrClickFile": "拖拽文件到此处或点击上传",
+    "previewFile": "预览文件",
+    "supportedFormats": {
+      "title": "支持以下格式：",
+      "office": "• Office文档：DOC, DOCX, XLS, XLSX, PPT, PPTX等",
+      "wps": "• WPS文档：WPS, DPS, ET等",
+      "image": "• 图片：JPG, PNG, GIF, PSD等",
+      "document": "• 文档：PDF, OFD, RTF, TXT等",
+      "model": "• 3D模型：OBJ, STL, FBX, DWG等",
+      "media": "• 音视频：MP3, MP4, AVI, MOV等",
+      "archive": "• 压缩包：ZIP, RAR, 7Z等"
+    }
   },
   "productsHeroTitle": "AI图片处理产品"
 }
