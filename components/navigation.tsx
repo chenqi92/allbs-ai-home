@@ -15,7 +15,11 @@ export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeItem, setActiveItem] = useState('/');
     const t = useTranslation();
-    const { lang } = useParams();
+    const {lang} = useParams();
+
+    if (!t.nav) {
+        return null;
+    }
 
     function scrollToTop(e: React.MouseEvent<HTMLAnchorElement>) {
         e.preventDefault();
@@ -29,8 +33,8 @@ export function Navigation() {
     }
 
     const navItems = [
-        {href: '#products', label: t.nav.products},
         {href: '#features', label: t.nav.features},
+        {href: '#products', label: t.nav.products},
         {href: '#pricing', label: t.nav.pricing},
         {href: '#faq', label: t.nav.faq},
         {href: '#contact', label: t.nav.contact},

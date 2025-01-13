@@ -16,6 +16,7 @@ import { useParams } from 'next/navigation';
 
 export function FAQ() {
   const t = useTranslation();
+
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('general');
   const { lang } = useParams();
