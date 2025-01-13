@@ -243,5 +243,23 @@
       "archive": "• 压缩包：ZIP, RAR, 7Z等"
     }
   },
-  "productsHeroTitle": "AI图片处理产品"
+  "productsHeroTitle": "AI图片处理产品",
+  "productDemos": {
+    "filePreview": {
+      "title": "全能文件预览",
+      "description": "上传并在浏览器中直接预览各种格式文件",
+      "dragOrClick": "拖拽文件到此处或点击上传",
+      "maxSize": "文件大小限制：10MB",
+      "uploading": "正在上传...",
+      "previewTitle": "文件预览",
+      "previewDescription": "预览链接已复制到剪贴板，您也可以直接在浏览器中打开。",
+      "openInBrowser": "在浏览器中打开",
+      "fileTooLarge": "文件过大",
+      "fileSizeLimit": "文件大小不能超过10MB",
+      "linkCopied": "链接已复制",
+      "linkCopiedDesc": "预览链接已复制到剪贴板",
+      "uploadFailed": "上传失败",
+      "tryAgain": "请稍后重试"
+    }
+  }
 }

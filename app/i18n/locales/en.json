@@ -243,5 +243,23 @@
       "archive": "• Archives: ZIP, RAR, 7Z, etc."
     }
   },
-  "productsHeroTitle": "AI Image Processing Products"
+  "productsHeroTitle": "AI Image Processing Products",
+  "productDemos": {
+    "filePreview": {
+      "title": "Universal File Preview",
+      "description": "Upload and preview various file formats directly in browser",
+      "dragOrClick": "Drag files here or click to upload",
+      "maxSize": "Maximum file size: 10MB",
+      "uploading": "Uploading...",
+      "previewTitle": "File Preview",
+      "previewDescription": "The preview link has been copied to your clipboard. You can also open it directly in your browser.",
+      "openInBrowser": "Open in Browser",
+      "fileTooLarge": "File too large",
+      "fileSizeLimit": "File size cannot exceed 10MB",
+      "linkCopied": "Link copied",
+      "linkCopiedDesc": "Preview link has been copied to clipboard",
+      "uploadFailed": "Upload failed",
+      "tryAgain": "Please try again later"
+    }
+  }
 }

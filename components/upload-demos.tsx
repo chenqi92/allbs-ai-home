@@ -19,12 +19,20 @@ import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {cn} from '@/lib/utils';
 import {useTranslation} from '@/app/i18n/translation-context';
+import {toast} from "@/hooks/use-toast";
 
 interface FileInfo {
     name: string;
     size: number;
     type: string;
     url: string;
+}
+
+function base64Encode(str: string): string {
+    if (typeof window !== 'undefined') {
+        return btoa(str);
+    }
+    return Buffer.from(str).toString('base64');
 }
 
 const fileCategories = {
@@ -58,6 +66,7 @@ export function UploadDemos() {
     const [generalFile, setGeneralFile] = useState<FileInfo | null>(null);
     const [isDraggingImage, setIsDraggingImage] = useState(false);
     const [isDraggingFile, setIsDraggingFile] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
 
     const handleDrag = (e: React.DragEvent, isDragging: boolean, setIsDragging: (value: boolean) => void) => {
         e.preventDefault();
@@ -108,19 +117,67 @@ export function UploadDemos() {
         }
     }, []);
 
-    const handleFileDrop = useCallback((e: React.DragEvent) => {
+    const handleFileDrop = useCallback(async (e: React.DragEvent) => {
         e.preventDefault();
         setIsDraggingFile(false);
 
         const file = e.dataTransfer.files[0];
         if (file) {
-            const fileInfo: FileInfo = {
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                url: URL.createObjectURL(file)
-            };
-            setGeneralFile(fileInfo);
+            const maxSize = 10 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast({
+                    title: t.productDemos.filePreview.fileTooLarge,
+                    description: t.productDemos.filePreview.fileSizeLimit,
+                    variant: "destructive",
+                });
+                return;
+            }
+
+            setIsUploading(true);
+
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const uploadResponse = await fetch('https://m.allbs.cn/api/minio/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await uploadResponse.json();
+
+                if (data.code === 200 && data.data?.url) {
+                    const fileInfo: FileInfo = {
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                        url: data.data.url
+                    };
+                    setGeneralFile(fileInfo);
+
+                    const encodedUrl = base64Encode(data.data.url);
+                    const previewUrl = `https://preview.allbs.cn/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
+
+                    await navigator.clipboard.writeText(previewUrl);
+                    toast({
+                        title: t.productDemos.filePreview.linkCopied,
+                        description: t.productDemos.filePreview.linkCopiedDesc,
+                    });
+
+                    window.open(previewUrl, '_blank');
+                } else {
+                    throw new Error(data.msg || t.productDemos.filePreview.uploadFailed);
+                }
+            } catch (error) {
+                console.error('上传失败:', error);
+                toast({
+                    title: t.productDemos.filePreview.uploadFailed,
+                    description: error instanceof Error ? error.message : t.productDemos.filePreview.tryAgain,
+                    variant: "destructive",
+                });
+            } finally {
+                setIsUploading(false);
+            }
         }
     }, []);
 
@@ -135,7 +192,6 @@ export function UploadDemos() {
     return (
         <section className="py-16 bg-gradient-to-b from-background to-muted/10">
             <div className="container mx-auto px-4 space-y-8">
-                {/* General File Upload Demo */}
                 <Card className="overflow-hidden border-none shadow-lg">
                     <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5">
                         <CardTitle className="flex items-center gap-2">
@@ -161,13 +217,10 @@ export function UploadDemos() {
                                     onChange={(e) => {
                                         const file = e.target.files?.[0];
                                         if (file) {
-                                            const fileInfo: FileInfo = {
-                                                name: file.name,
-                                                size: file.size,
-                                                type: file.type,
-                                                url: URL.createObjectURL(file)
-                                            };
-                                            setGeneralFile(fileInfo);
+                                            handleFileDrop({
+                                                preventDefault: () => {},
+                                                dataTransfer: { files: [file] }
+                                            } as unknown as React.DragEvent);
                                         }
                                     }}
                                 />
@@ -188,6 +241,18 @@ export function UploadDemos() {
                                     </div>
                                 </div>
                             </div>
+
+                            {isUploading && (
+                                <div className="text-center">
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="inline-block"
+                                    >
+                                        {t.productDemos.filePreview.uploading}
+                                    </motion.div>
+                                </div>
+                            )}
 
                             {generalFile && (
                                 <motion.div

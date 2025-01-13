@@ -1,274 +1,211 @@
 // 'use client';
 //
-// import {useState, useRef, useEffect} from 'react';
-// import {motion} from 'framer-motion';
-// import Webcam from 'react-webcam';
-// import * as cocoSsd from '@tensorflow-models/coco-ssd';
-// import * as tf from '@tensorflow/tfjs';
-// import {Upload, Download, Camera} from 'lucide-react';
-// import {Button} from '@/components/ui/button';
-// import {Slider} from '@/components/ui/slider';
+// import { useState, useCallback } from 'react';
+// import { motion } from 'framer-motion';
+// import { Upload, Eye, AlertCircle } from 'lucide-react';
+// import { Button } from '@/components/ui/button';
 // import {
-//     Select,
-//     SelectContent,
-//     SelectItem,
-//     SelectTrigger,
-//     SelectValue,
-// } from '@/components/ui/select';
-// import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardHeader,
+//   CardTitle,
+// } from '@/components/ui/card';
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+// } from '@/components/ui/dialog';
+// import { useToast } from '@/components/ui/use-toast';
+// import { cn } from '@/lib/utils';
+// import { useTranslation } from '@/app/i18n/translation-context';
 //
-// const idPhotoSizes = [
-//     {value: '1inch', label: '1寸 (25×35mm)'},
-//     {value: '2inch', label: '2寸 (35×49mm)'},
-//     {value: 'passport', label: '护照 (33×48mm)'},
-//     {value: 'visa', label: '签证 (33×48mm)'},
-// ];
+// interface FileInfo {
+//   name: string;
+//   size: number;
+//   type: string;
+//   url: string;
+// }
+//
+// // Base64 编码函数
+// function base64Encode(str: string): string {
+//   if (typeof window !== 'undefined') {
+//     return btoa(str);
+//   }
+//   return Buffer.from(str).toString('base64');
+// }
 //
 // export function ProductDemos() {
-//     const [activeTab, setActiveTab] = useState('bg-removal');
-//     const [bgImage, setBgImage] = useState<string | null>(null);
-//     const [sliderPosition, setSliderPosition] = useState(50);
-//     const [idPhotoSize, setIdPhotoSize] = useState('1inch');
-//     const [idPhotoImage, setIdPhotoImage] = useState<string | null>(null);
-//     const [detections, setDetections] = useState<any[]>([]);
-//     const [isWebcamActive, setIsWebcamActive] = useState(false);
+//   const t = useTranslation();
+//   const { toast } = useToast();
+//   const [isDragging, setIsDragging] = useState(false);
+//   const [isUploading, setIsUploading] = useState(false);
+//   const [showPreviewDialog, setShowPreviewDialog] = useState(false);
+//   const [previewUrl, setPreviewUrl] = useState<string>('');
+//   const [selectedFile, setSelectedFile] = useState<FileInfo | null>(null);
 //
-//     const webcamRef = useRef<Webcam>(null);
-//     const canvasRef = useRef<HTMLCanvasElement>(null);
-//     const modelRef = useRef<cocoSsd.ObjectDetection | null>(null);
+//   const handleDrag = useCallback((e: React.DragEvent, isDragging: boolean) => {
+//     e.preventDefault();
+//     e.stopPropagation();
+//     setIsDragging(isDragging);
+//   }, []);
 //
-//     useEffect(() => {
-//         if (activeTab === 'object-detection' && isWebcamActive) {
-//             loadModel();
-//         }
-//     }, [activeTab, isWebcamActive]);
+//   const handleFileDrop = useCallback(async (e: React.DragEvent) => {
+//     e.preventDefault();
+//     setIsDragging(false);
 //
-//     const loadModel = async () => {
-//         try {
-//             await tf.ready();
-//             modelRef.current = await cocoSsd.load();
-//             if (isWebcamActive) {
-//                 detectObjects();
-//             }
-//         } catch (error) {
-//             console.error('Error loading model:', error);
-//         }
-//     };
+//     const file = e.dataTransfer.files[0];
+//     if (file) {
+//       await handleFileUpload(file);
+//     }
+//   }, []);
 //
-//     const detectObjects = async () => {
-//         if (!modelRef.current || !webcamRef.current?.video || !canvasRef.current) return;
+//   const handleFileUpload = async (file: File) => {
+//     // 检查文件大小限制 (10MB)
+//     const maxSize = 10 * 1024 * 1024;
+//     if (file.size > maxSize) {
+//       toast({
+//         title: t.productDemos.filePreview.fileTooLarge,
+//         description: t.productDemos.filePreview.fileSizeLimit,
+//         variant: "destructive",
+//       });
+//       return;
+//     }
 //
-//         const video = webcamRef.current.video;
-//         const canvas = canvasRef.current;
-//         const context = canvas.getContext('2d');
-//         if (!context) return;
+//     setIsUploading(true);
 //
-//         const detectFrame = async () => {
-//             if (modelRef.current && video.readyState === 4) {
-//                 const predictions = await modelRef.current.detect(video);
-//                 setDetections(predictions);
+//     try {
+//       const formData = new FormData();
+//       formData.append('file', file);
 //
-//                 // Draw video frame
-//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
+//       // 上传文件到指定接口
+//       const uploadResponse = await fetch('https://m.allbs.cn/api/upload', {
+//         method: 'POST',
+//         body: formData,
+//       });
 //
-//                 // Draw detections
-//                 predictions.forEach(prediction => {
-//                     const [x, y, width, height] = prediction.bbox;
-//                     context.strokeStyle = '#00ff00';
-//                     context.lineWidth = 2;
-//                     context.strokeRect(x, y, width, height);
-//                     context.fillStyle = '#00ff00';
-//                     context.fillText(
-//                         `${prediction.class} ${Math.round(prediction.score * 100)}%`,
-//                         x,
-//                         y > 10 ? y - 5 : 10
-//                     );
-//                 });
-//             }
-//             requestAnimationFrame(detectFrame);
+//       const data = await uploadResponse.json();
+//
+//       if (data.ok) {
+//         const fileInfo: FileInfo = {
+//           name: file.name,
+//           size: file.size,
+//           type: file.type,
+//           url: data.data.url,
 //         };
+//         setSelectedFile(fileInfo);
 //
-//         detectFrame();
-//     };
+//         // Base64 编码文件 URL
+//         const encodedUrl = base64Encode(data.data.url);
+//         // 生成预览 URL
+//         const previewUrl = `https://preview.allbs.cn/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
+//         setPreviewUrl(previewUrl);
 //
-//     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-//         const file = e.target.files?.[0];
-//         if (!file) return;
+//         // 复制预览链接到剪贴板
+//         await navigator.clipboard.writeText(previewUrl);
+//         toast({
+//           title: t.productDemos.filePreview.linkCopied,
+//           description: t.productDemos.filePreview.linkCopiedDesc,
+//         });
 //
-//         if (file.size > 5 * 1024 * 1024) {
-//             alert('文件大小不能超过5MB');
-//             return;
-//         }
+//         // 直接在新标签页中打开预览
+//         window.open(previewUrl, '_blank');
+//       } else {
+//         throw new Error(data.message || t.productDemos.filePreview.uploadFailed);
+//       }
+//     } catch (error) {
+//       console.error('上传失败:', error);
+//       toast({
+//         title: t.productDemos.filePreview.uploadFailed,
+//         description: error instanceof Error ? error.message : t.productDemos.filePreview.tryAgain,
+//         variant: "destructive",
+//       });
+//     } finally {
+//       setIsUploading(false);
+//     }
+//   };
 //
-//         const reader = new FileReader();
-//         reader.onload = (event) => {
-//             const dataUrl = event.target?.result as string;
-//             if (type === 'bg-removal') {
-//                 setBgImage(dataUrl);
-//             } else if (type === 'id-photo') {
-//                 setIdPhotoImage(dataUrl);
-//             }
-//         };
-//         reader.readAsDataURL(file);
-//     };
+//   const formatFileSize = (bytes: number) => {
+//     if (bytes === 0) return '0 Bytes';
+//     const k = 1024;
+//     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+//     const i = Math.floor(Math.log(bytes) / Math.log(k));
+//     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+//   };
 //
-//     return (
-//         <section className="py-16 bg-muted/30">
-//             <div className="container mx-auto px-4">
-//                 <h2 className="text-3xl font-bold text-center mb-12">产品体验区</h2>
+//   return (
+//     <section className="py-16">
+//       <div className="container mx-auto px-4">
+//         <Card className="overflow-hidden border-none shadow-lg">
+//           <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5">
+//             <CardTitle className="flex items-center gap-2">
+//               <Eye className="h-5 w-5" />
+//               {t.productDemos.filePreview.title}
+//             </CardTitle>
+//             <CardDescription>
+//               {t.productDemos.filePreview.description}
+//             </CardDescription>
+//           </CardHeader>
+//           <CardContent className="p-6">
+//             <div className="space-y-4">
+//               <div
+//                 className={cn(
+//                   "border-2 border-dashed rounded-lg p-8 transition-all duration-200",
+//                   isDragging ? "border-primary bg-primary/5 scale-[0.99]" : "border-muted-foreground/25 hover:border-primary/50",
+//                   "relative"
+//                 )}
+//                 onDragOver={(e) => handleDrag(e, true)}
+//                 onDragLeave={(e) => handleDrag(e, false)}
+//                 onDrop={handleFileDrop}
+//               >
+//                 <input
+//                   type="file"
+//                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+//                   onChange={(e) => {
+//                     const file = e.target.files?.[0];
+//                     if (file) {
+//                       handleFileUpload(file);
+//                     }
+//                   }}
+//                 />
+//                 <div className="text-center">
+//                   <Upload className="mx-auto h-12 w-12 text-muted-foreground/50" />
+//                   <p className="mt-2 text-sm text-muted-foreground">
+//                     {t.productDemos.filePreview.dragOrClick}
+//                   </p>
+//                   <p className="mt-1 text-xs text-muted-foreground">
+//                     {t.productDemos.filePreview.maxSize}
+//                   </p>
+//                   <div className="mt-4 text-xs text-muted-foreground space-y-1">
+//                     <p>{t.uploadDemos.supportedFormats.title}</p>
+//                     <p>{t.uploadDemos.supportedFormats.office}</p>
+//                     <p>{t.uploadDemos.supportedFormats.wps}</p>
+//                     <p>{t.uploadDemos.supportedFormats.image}</p>
+//                     <p>{t.uploadDemos.supportedFormats.document}</p>
+//                     <p>{t.uploadDemos.supportedFormats.model}</p>
+//                     <p>{t.uploadDemos.supportedFormats.media}</p>
+//                     <p>{t.uploadDemos.supportedFormats.archive}</p>
+//                   </div>
+//                 </div>
+//               </div>
 //
-//                 <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-//                     <TabsList className="grid grid-cols-3 w-full max-w-2xl mx-auto">
-//                         <TabsTrigger value="bg-removal">智能抠图</TabsTrigger>
-//                         <TabsTrigger value="id-photo">证件照制作</TabsTrigger>
-//                         <TabsTrigger value="object-detection">实时物体识别</TabsTrigger>
-//                     </TabsList>
-//
-//                     <TabsContent value="bg-removal" className="space-y-4">
-//                         <div className="bg-card rounded-lg p-6">
-//                             <div className="flex justify-center mb-4">
-//                                 <Button className="relative">
-//                                     <input
-//                                         type="file"
-//                                         accept=".jpg,.jpeg,.png"
-//                                         onChange={(e) => handleImageUpload(e, 'bg-removal')}
-//                                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-//                                     />
-//                                     <Upload className="mr-2 h-4 w-4"/>
-//                                     上传图片
-//                                 </Button>
-//                             </div>
-//
-//                             {bgImage && (
-//                                 <div className="space-y-4">
-//                                     <div className="relative h-[400px] overflow-hidden rounded-lg">
-//                                         <img
-//                                             src={bgImage}
-//                                             alt="Original"
-//                                             className="absolute top-0 left-0 w-full h-full object-contain"
-//                                         />
-//                                         <div
-//                                             className="absolute top-0 right-0 w-full h-full bg-transparent"
-//                                             style={{
-//                                                 clipPath: `polygon(${sliderPosition}% 0, 100% 0, 100% 100%, ${sliderPosition}% 100%)`,
-//                                             }}
-//                                         >
-//                                             <div
-//                                                 className="w-full h-full bg-[url('/checkered-pattern.png')] bg-repeat"/>
-//                                         </div>
-//                                         <div
-//                                             className="absolute top-0 w-1 h-full bg-white cursor-col-resize"
-//                                             style={{left: `${sliderPosition}%`}}
-//                                             onMouseDown={() => {
-//                                                 const handleMove = (e: MouseEvent) => {
-//                                                     const rect = e.currentTarget?.getBoundingClientRect();
-//                                                     if (rect) {
-//                                                         const x = e.clientX - rect.left;
-//                                                         const newPosition = (x / rect.width) * 100;
-//                                                         setSliderPosition(Math.max(0, Math.min(100, newPosition)));
-//                                                     }
-//                                                 };
-//                                                 document.addEventListener('mousemove', handleMove);
-//                                                 document.addEventListener('mouseup', () => {
-//                                                     document.removeEventListener('mousemove', handleMove);
-//                                                 }, {once: true});
-//                                             }}
-//                                         />
-//                                     </div>
-//                                     <Button className="w-full">
-//                                         <Download className="mr-2 h-4 w-4"/>
-//                                         下载结果
-//                                     </Button>
-//                                 </div>
-//                             )}
-//                         </div>
-//                     </TabsContent>
-//
-//                     <TabsContent value="id-photo" className="space-y-4">
-//                         <div className="bg-card rounded-lg p-6">
-//                             <div className="flex flex-col items-center space-y-4">
-//                                 <Button className="relative">
-//                                     <input
-//                                         type="file"
-//                                         accept=".jpg,.jpeg,.png"
-//                                         onChange={(e) => handleImageUpload(e, 'id-photo')}
-//                                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-//                                     />
-//                                     <Upload className="mr-2 h-4 w-4"/>
-//                                     上传照片
-//                                 </Button>
-//
-//                                 <Select value={idPhotoSize} onValueChange={setIdPhotoSize}>
-//                                     <SelectTrigger className="w-[200px]">
-//                                         <SelectValue placeholder="选择证件照规格"/>
-//                                     </SelectTrigger>
-//                                     <SelectContent>
-//                                         {idPhotoSizes.map((size) => (
-//                                             <SelectItem key={size.value} value={size.value}>
-//                                                 {size.label}
-//                                             </SelectItem>
-//                                         ))}
-//                                     </SelectContent>
-//                                 </Select>
-//
-//                                 {idPhotoImage && (
-//                                     <div className="space-y-4 w-full">
-//                                         <div
-//                                             className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden rounded-lg">
-//                                             <img
-//                                                 src={idPhotoImage}
-//                                                 alt="ID Photo Preview"
-//                                                 className="w-full h-full object-cover"
-//                                             />
-//                                         </div>
-//                                         <Button className="w-full">
-//                                             <Download className="mr-2 h-4 w-4"/>
-//                                             一键下载
-//                                         </Button>
-//                                     </div>
-//                                 )}
-//                             </div>
-//                         </div>
-//                     </TabsContent>
-//
-//                     <TabsContent value="object-detection" className="space-y-4">
-//                         <div className="bg-card rounded-lg p-6">
-//                             <div className="flex flex-col items-center space-y-4">
-//                                 {!isWebcamActive ? (
-//                                     <Button onClick={() => setIsWebcamActive(true)}>
-//                                         <Camera className="mr-2 h-4 w-4"/>
-//                                         开启摄像头
-//                                     </Button>
-//                                 ) : (
-//                                     <div className="space-y-4 w-full">
-//                                         <div className="relative aspect-video max-w-3xl mx-auto">
-//                                             <Webcam
-//                                                 ref={webcamRef}
-//                                                 className="absolute inset-0 w-full h-full object-contain rounded-lg"
-//                                             />
-//                                             <canvas
-//                                                 ref={canvasRef}
-//                                                 className="absolute inset-0 w-full h-full"
-//                                             />
-//                                         </div>
-//                                         <div className="max-w-sm mx-auto">
-//                                             <h3 className="font-semibold mb-2">识别结果：</h3>
-//                                             <ul className="space-y-1">
-//                                                 {detections.map((detection, index) => (
-//                                                     <li key={index} className="flex justify-between">
-//                                                         <span>{detection.class}</span>
-//                                                         <span>{Math.round(detection.score * 100)}%</span>
-//                                                     </li>
-//                                                 ))}
-//                                             </ul>
-//                                         </div>
-//                                     </div>
-//                                 )}
-//                             </div>
-//                         </div>
-//                     </TabsContent>
-//                 </Tabs>
+//               {isUploading && (
+//                 <div className="text-center">
+//                   <motion.div
+//                     initial={{ opacity: 0 }}
+//                     animate={{ opacity: 1 }}
+//                     className="inline-block"
+//                   >
+//                     {t.productDemos.filePreview.uploading}
+//                   </motion.div>
+//                 </div>
+//               )}
 //             </div>
-//         </section>
-//     );
+//           </CardContent>
+//         </Card>
+//       </div>
+//     </section>
+//   );
 // }
