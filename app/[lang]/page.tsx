@@ -6,7 +6,7 @@ import {FAQ} from '@/components/faq';
 import {Footer} from '@/components/footer';
 import { Products } from '@/components/products';
 import { UploadDemos } from '@/components/upload-demos';
-import { ProductDemos } from '@/components/product-demos';
+// import { ProductDemos } from '@/components/product-demos';
 
 export default function Home() {
     return (
