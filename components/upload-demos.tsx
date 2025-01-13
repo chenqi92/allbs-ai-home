@@ -20,6 +20,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {cn} from '@/lib/utils';
 import {useTranslation} from '@/app/i18n/translation-context';
 import {toast} from "@/hooks/use-toast";
+import api from '@/utils/api';
 
 interface FileInfo {
     name: string;
@@ -136,15 +137,7 @@ export function UploadDemos() {
             setIsUploading(true);
 
             try {
-                const formData = new FormData();
-                formData.append('file', file);
-
-                const uploadResponse = await fetch('https://m.allbs.cn/api/minio/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                const data = await uploadResponse.json();
+                const data = await api.upload('/minio/upload', file);
 
                 if (data.code === 200 && data.data?.url) {
                     const fileInfo: FileInfo = {
@@ -156,7 +149,7 @@ export function UploadDemos() {
                     setGeneralFile(fileInfo);
 
                     const encodedUrl = base64Encode(data.data.url);
-                    const previewUrl = `https://preview.allbs.cn/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
+                    const previewUrl = `${process.env.NEXT_PUBLIC_PREVIEW_URL}/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
 
                     await navigator.clipboard.writeText(previewUrl);
                     toast({
