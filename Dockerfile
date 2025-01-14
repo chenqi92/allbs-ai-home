@@ -38,7 +38,7 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 
 # 如果还需要 public 文件夹、配置文件，也在这里复制：
-# COPY --from=builder /app/public ./public
+COPY --from=builder /app/public ./public
 
 # 暴露容器内的 3000 端口（Next.js 默认端口）
 EXPOSE 3000
