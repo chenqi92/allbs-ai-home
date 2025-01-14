@@ -152,13 +152,18 @@ export function UploadDemos() {
                     const encodedUrl = base64Encode(data.data.url);
                     const previewUrl = `${process.env.NEXT_PUBLIC_PREVIEW_URL}/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
 
-                    await navigator.clipboard.writeText(previewUrl);
-                    toast({
-                        title: t.productDemos.filePreview.linkCopied,
-                        description: t.productDemos.filePreview.linkCopiedDesc,
-                    });
-
                     window.open(previewUrl, '_blank');
+                    
+                    try {
+                        await navigator.clipboard.writeText(previewUrl);
+                        toast({
+                            title: t.productDemos.filePreview.linkCopied,
+                            description: t.productDemos.filePreview.linkCopiedDesc,
+                        });
+                    } catch (clipboardError) {
+                        console.warn('Failed to copy to clipboard:', clipboardError);
+                    }
+
                 } else {
                     throw new Error(data.msg || t.productDemos.filePreview.uploadFailed);
                 }
