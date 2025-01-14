@@ -188,6 +188,25 @@ export function UploadDemos() {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     };
 
+    const handlePreviewClick = useCallback(() => {
+        if (generalFile?.url) {
+            const encodedUrl = base64Encode(generalFile.url);
+            const previewUrl = `${process.env.NEXT_PUBLIC_PREVIEW_URL}/onlinePreview?url=${encodeURIComponent(encodedUrl)}`;
+            
+            window.open(previewUrl, '_blank');
+            
+            try {
+                navigator.clipboard.writeText(previewUrl);
+                toast({
+                    title: t.productDemos.filePreview.linkCopied,
+                    description: t.productDemos.filePreview.linkCopiedDesc,
+                });
+            } catch (clipboardError) {
+                console.warn('Failed to copy to clipboard:', clipboardError);
+            }
+        }
+    }, [generalFile]);
+
     return (
         <section className="py-16 bg-gradient-to-b from-background to-muted/10">
             <div className="container mx-auto px-4 space-y-8">
@@ -272,6 +291,7 @@ export function UploadDemos() {
                                         </div>
                                     </div>
                                     <Button
+                                        onClick={handlePreviewClick}
                                         className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary">
                                         <Eye className="mr-2 h-4 w-4"/>
                                         {t.uploadDemos.previewFile}
